@@ -79,6 +79,7 @@ while getopts ":bfgv" opt; do
 		mkdir -p "${NVIM_BASE}"/nvim
 		safe-link ~/.vim "${DIR}"/vim.d/vim/ "${suffix}"
 		safe-link "${NVIM_BASE}"/nvim/init.vim "${DIR}"/vim.d/vimrc "${suffix}"
+		safe-link ~/.ycm_extra_conf.py "${DIR}"/vim.d/ycm_extra_conf.py "${suffix}"
 		;;
 	\?)
 		echo "Invalid option: -${OPTARG}"
