@@ -87,7 +87,7 @@ set wildmode=list:longest
 set wildignore+=*.o,*.d,nohup.out,tags,.hs-tags,*.hi,*.gcno,*.gcda,*.fasl,*.pyc
 
 " Number of lines to scroll past when the cursor scrolls off the screen
-set scrolloff=2
+set scrolloff=8
 
 " Tool to use for Grepper
 set grepprg="git"
@@ -137,10 +137,7 @@ set showmatch
 
 " Set the folding method
 set foldenable
-set foldlevelstart=10
 set foldmethod=manual
-set foldnestmax=0
-set foldminlines=3
 
 "" ============================================================================
 ""                               Auto Commands

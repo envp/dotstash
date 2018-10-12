@@ -45,4 +45,7 @@
     sslVerify = false
 [user]
 	email = vyenamandra@bloomberg.net
-	name = Vaibhav Yenamandra
+    name = Vaibhav Yenamandra
+
+[include]
+    path = ~/.bbgithub

@@ -5,6 +5,9 @@ call plug#begin('~/.local/share/nvim/plugged')
     " Fuzzy file search
     Plug 'ctrlpvim/ctrlp.vim'
 
+    " Syntax checking
+    Plug 'scrooloose/syntastic'
+
     " NERDTree file navigation
     Plug 'scrooloose/nerdtree'
 
@@ -69,6 +72,9 @@ call plug#begin('~/.local/share/nvim/plugged')
 
     " CMake Syntax
     Plug 'pboettch/vim-cmake-syntax'
+
+    " Support to edit fish scripts
+    Plug 'dag/vim-fish'
 
     " Base 16 color schemes
     Plug 'chriskempson/base16-vim'

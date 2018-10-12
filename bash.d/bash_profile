@@ -8,3 +8,5 @@ source /etc/profile.d/256term.sh
 source /etc/profile.d/lang.sh
 
 source ~/.bashrc
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
