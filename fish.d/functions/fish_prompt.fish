@@ -4,14 +4,14 @@ function fish_prompt
     set -l color_host bryellow
     set -l color_git magenta
     set -l color_user
-    set -l suffix 'λ'
+    set -l suffix
     set -l prefix
 
     # Set up the prompt to show the if the last exit status was a success
     if test $status -eq 0
-        set prefix (set_color green) '✔' (set_color normal)
+        set suffix (set_color green) 'λ' (set_color normal)
     else
-        set prefix (set_color red) '✕' (set_color normal)
+        set suffix (set_color red) 'λ' (set_color normal)
     end
 
     # Do this only once (borrowed from original fish_prompt code)
@@ -29,13 +29,12 @@ function fish_prompt
     end
 
     # The actual prompt
-    echo -n -s "$prefix"                                                      \
-        (set_color $color_user) "$USER" (set_color normal)                    \
+    echo -n -s (set_color $color_user) "$USER" (set_color normal)             \
         @                                                                     \
         (set_color $color_host) "$__fish_prompt_hostname" (set_color normal)  \
         ':'                                                                   \
         (set_color $color_cwd) (prompt_pwd) (set_color normal)                \
         (__fish_git_prompt)                                                   \
-        " $suffix "
+        "$suffix"
 end
 

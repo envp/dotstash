@@ -149,7 +149,8 @@ let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'haskell': ['stack_build', 'hdevtools'],
 \   'cpp': ['clang-tidy-6'],
-\   'python': ['pylint3.6', 'flake8', 'pycodestyle']
+\   'python': ['pylint3.6', 'flake8', 'pycodestyle'],
+\   'fish': ['fish -n']
 \}
 let g:ale_linters_explicit = 1
 let g:ale_cpp_clang_executable = '/usr/bin/clang++-6'
