@@ -8,6 +8,10 @@ endif
 "" ============================================================================
 ""                                  Globals
 "" ============================================================================
+" Python env
+let g:python2_host_prog = '/usr/bin/python2'
+let g:python3_host_prog = '/opt/bb/bin/python3.6'
+
 " Determine Environment
 let g:platform = GetPlatform()
 
@@ -170,12 +174,7 @@ autocmd BufWinLeave *.* call clearmatches()
 autocmd! FileType haskell setlocal tabstop=2
 autocmd! FileType haskell setlocal shiftwidth=2
 
-" Fix C++ omni completion
-autocmd FileType cpp set omnifunc=omni#cpp#complete#Main
-autocmd FileType h set omnifunc=omni#cpp#complete#Main
-
 " Rainbow parens mess with CMake syntax highlighting :(
 autocmd FileType cmake call rainbow_main#clear()
 
 autocmd! FileType haskell map <buffer> <F3> :!hindent %<CR>
-map <F3> :Autoformat<CR>

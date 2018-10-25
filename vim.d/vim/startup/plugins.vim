@@ -79,6 +79,15 @@ call plug#begin('~/.local/share/nvim/plugged')
     " Base 16 color schemes
     Plug 'chriskempson/base16-vim'
     Plug 'rakr/vim-one'
+
+    " Deal with csv files
+    Plug 'chrisbra/csv.vim'
+
+    " VCS integration across the board
+    Plug 'vim-scripts/vcscommand.vim'
+
+    " Easier movement everywhere
+    Plug 'easymotion/vim-easymotion'
 call plug#end()
 
 "" ============================================================================
@@ -126,7 +135,7 @@ let g:gitgutter_max_signs=9999
 " NERDTree
 let g:NERDTreeDirArrowExpandable="+"
 let g:NERDTreeDirArrowCollapsible="~"
-let NERDTreeIgnore = ['\.o$', '\.a$', '\.out$', '\.tsk$', '\.linux$', '^00[[dir]]']
+let NERDTreeIgnore = ['\.pyc$', '\.o$', '\.a$', '\.out$', '\.tsk$', '\.linux$', '^00[[dir]]']
 
 " Syntastic
 let g:syntastic_aggregate_errors = 0
@@ -149,8 +158,9 @@ let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'haskell': ['stack_build', 'hdevtools'],
 \   'cpp': ['clang-tidy-6'],
-\   'python': ['pylint3.6', 'flake8', 'pycodestyle'],
-\   'fish': ['fish -n']
+\   'python': ['pylint3.6', 'pycodestyle'],
+\   'fish': ['fish -n'],
+\   'perl': ['perl']
 \}
 let g:ale_linters_explicit = 1
 let g:ale_cpp_clang_executable = '/usr/bin/clang++-6'
@@ -195,4 +205,3 @@ let g:rainbow_conf = {
 " Jedi configuration
 let g:jedi#usages_command = '<leader>u'
 let g:jedi#show_call_signatures = 2
-let g:formatterpath = ['/opt/bb/bin/yapf']
