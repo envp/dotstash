@@ -5,6 +5,7 @@ function fish_prompt
     set -l color_git magenta
     set -l color_user
     set -l suffix
+    set -l prefix
 
     # Set up the prompt to show the if the last exit status was a success
     if test $status -eq 0
@@ -36,3 +37,4 @@ function fish_prompt
         (__fish_git_prompt)                                                   \
         "$suffix"
 end
+

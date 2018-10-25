@@ -10,7 +10,6 @@ set __fish_git_prompt_color_upstream_ahead brgreen
 set __fish_git_prompt_color_upstream_behind brred
 
 set -gx EDITOR nvim
-set -gx PATH /opt/bb/bin $PATH
 set -gx LANG 'en_US.UTF-8'
 
 
@@ -31,3 +30,5 @@ set -q PERL_LOCAL_LIB_ROOT; and set -x PERL_LOCAL_LIB_ROOT /home/vyenamandra/per
 set -q PERL_LOCAL_LIB_ROOT; or set -x PERL_LOCAL_LIB_ROOT /home/vyenamandra/perl5;
 set -x PERL_MB_OPT --install_base\ \"/home/vyenamandra/perl5\";
 set -x PERL_MM_OPT INSTALL_BASE=/home/vyenamandra/perl5;
+
+set -gx PATH /opt/bb/bin $HOME/.local/bin $PATH
