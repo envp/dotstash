@@ -34,6 +34,8 @@ endif
 filetype plugin indent on
 set autoindent
 set cindent
+set hidden
+set noshowmode
 set backspace=indent,eol,start
 
 " Get rid of terminal bell sound
@@ -54,6 +56,9 @@ set shiftwidth=4
 
 " 79 char maximum column width
 set colorcolumn=79
+
+" Always draw this
+set signcolumn=yes
 
 " Underline the line at which cursor is present because I can't see a tiny green rectangle
 set cursorline

@@ -42,7 +42,8 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'vim-airline/vim-airline-themes'
 
     " Indentation level guides
-    Plug 'nathanaelkane/vim-indent-guides'
+    " Plug 'nathanaelkane/vim-indent-guides'
+    Plug 'Yggdroot/indentLine'
 
     " Automagically format code using system formatter
     Plug 'Chiel92/vim-autoformat'
@@ -57,9 +58,13 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'w0rp/ale'
 
     " Code Completion
-    Plug 'Valloric/YouCompleteMe'
-    Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
-
+    Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'Shougo/echodoc.vim'
+    Plug 'zchee/deoplete-jedi'
 
     " Easier to see paratheses matching with this
     Plug 'luochen1990/rainbow'
@@ -76,18 +81,21 @@ call plug#begin('~/.local/share/nvim/plugged')
     " Support to edit fish scripts
     Plug 'dag/vim-fish'
 
-    " Base 16 color schemes
-    Plug 'chriskempson/base16-vim'
+    " COLOR SCHEMES~
     Plug 'rakr/vim-one'
+    Plug 'ayu-theme/ayu-vim'
 
     " Deal with csv files
     Plug 'chrisbra/csv.vim'
 
+    " RIP ghc mode
+    Plug 'neovimhaskell/haskell-vim'
+
     " VCS integration across the board
     Plug 'vim-scripts/vcscommand.vim'
 
-    " Easier movement everywhere
-    Plug 'easymotion/vim-easymotion'
+    " TagBar
+    Plug 'majutsushi/tagbar'
 call plug#end()
 
 "" ============================================================================
@@ -158,7 +166,7 @@ let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'haskell': ['stack_build', 'hdevtools'],
 \   'cpp': ['clang-tidy-6'],
-\   'python': ['pylint3.6', 'pycodestyle'],
+\   'python': ['pylint', 'pycodestyle'],
 \   'fish': ['fish -n'],
 \   'perl': ['perl']
 \}
@@ -169,13 +177,12 @@ let g:ale_cpp_clangcheck_executable = '/opt/bb/lib/llvm-6.0/bin/clang-check'
 let g:ale_cpp_cquery_executable = '~/.local/bin/cquery'
 let g:ale_cpp_clangtidy_executable = '/opt/bb/bin/clang-tidy-6'
 
- " Completion with YCM
-let g:ycm_min_num_of_chars_for_completion = 3
-let g:ycm_python_binary_path = 'python3.6'
-
-" LSP config
-let g:LanguageClient_serverCommands = {
-            \ 'cpp': ['clangd', '-enable-snippets', '-j=2']}
+" Completion with LSP
+let g:LanguageClient_autoStart = 1
+let g:LanguageClient_serverCommands = {}
+let g:LanguageClient_serverCommands.python = ['pyls']
+let g:LanguageClient_serverCommands.cpp = ['clangd-7']
+let g:LanguageClient_serverCommands.c = ['clangd-7']
 
 " Rainbow parens
 let g:rainbow_active = 1
@@ -205,3 +212,20 @@ let g:rainbow_conf = {
 " Jedi configuration
 let g:jedi#usages_command = '<leader>u'
 let g:jedi#show_call_signatures = 2
+
+" Deoplete
+let g:deoplete#enable_at_startup = 1
+
+" Echodoc
+let g:echodoc#enable_at_startup = 1
+let g:echodoc#type = 'signature'
+
+let ayucolor="dark"
+
+" IndentLine {{
+let g:indentLine_char = ''
+let g:indentLine_first_char = ''
+let g:indentLine_showFirstIndentLevel = 1
+let g:indentLine_setColors = 0
+" }}
+

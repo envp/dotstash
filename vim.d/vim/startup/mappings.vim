@@ -12,7 +12,7 @@ if has("gui_running")
     imap <silent>  <S-Insert>  <Esc>"+p
 endif
 
-map <C-]> :YcmCompleter GoTo<CR>
+map <C-]> :call LanguageClient#textDocument_definition({'gotoCmd': 'split'})<CR>
 
 "" ============================================================================
 ""                           Insert Mode Mappings
