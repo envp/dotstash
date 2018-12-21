@@ -3,6 +3,7 @@
 "" ============================================================================
 map <C-l> :nohlsearch<CR>
 map <silent <S-Insert> "+p
+nmap <F7> :GitGutterToggle<CR>
 nmap <F8> :TagbarToggle<CR>
 nmap <F12> :FSHere<CR>
 noremap <F5> :RainbowToggle<CR>

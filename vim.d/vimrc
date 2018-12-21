@@ -16,5 +16,7 @@ source ~/.vim/startup/mappings.vim
 
 set background=dark
 colorscheme ayu
-highlight ColorColumn guibg=Gray
 
+" ColorScheme overrides
+highlight ColorColumn guibg=Gray
+highlight VertSplit guibg=Gray

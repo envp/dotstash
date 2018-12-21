@@ -25,7 +25,7 @@
     diff = true
 
 [core]
-    pager = less -R
+	pager = less -R
     preloadindex = true
 	excludesfile = /home/vyenamandra/.gitignore
 

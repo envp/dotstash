@@ -8,10 +8,8 @@ setlocal textwidth=79
 call SetLSPShortcuts()
 
 
-setlocal tabstop=4
+setlocal tabstop=2
 setlocal expandtab
 setlocal shiftwidth=2
-setlocal nosmarttab
-setlocal nosmartindent
 
 setlocal omnifunc=ccomplete#Complete()

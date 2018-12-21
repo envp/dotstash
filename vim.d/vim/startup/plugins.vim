@@ -93,9 +93,6 @@ call plug#begin('~/.local/share/nvim/plugged')
 
     " VCS integration across the board
     Plug 'vim-scripts/vcscommand.vim'
-
-    " TagBar
-    Plug 'majutsushi/tagbar'
 call plug#end()
 
 "" ============================================================================
@@ -136,6 +133,9 @@ let g:airline_section_z = '%3p%% %l/%L:%3v'
 
 " CtrlP
 let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_root_markers = ['.git']
+let g:ctrlp_user_command = ['.git', 'rg --files-with-matches ".*" %s', 'find %s -type f']
+
 
 " GitGutter
 let g:gitgutter_max_signs=9999
@@ -150,10 +150,9 @@ let g:syntastic_aggregate_errors = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_cpp_config_file = '.syntastic_cpp_config'
-let g:syntastic_mode_map = { 'passive_filetypes': ['python'] }
 
 " clang_complete
-let g:clang_library_path = '/opt/bb/lib/llvm-6.0/lib64/libclang.so'
+let g:clang_library_path = '/opt/bb/lib/llvm-7.0/lib64/libclang.so'
 
 " Linting with ALE
 let g:ale_completion_enabled = 1
@@ -223,8 +222,8 @@ let g:echodoc#type = 'signature'
 let ayucolor="dark"
 
 " IndentLine {{
-let g:indentLine_char = ''
-let g:indentLine_first_char = ''
+let g:indentLine_char = '┣'
+let g:indentLine_first_char = '┣'
 let g:indentLine_showFirstIndentLevel = 1
 let g:indentLine_setColors = 0
 " }}
