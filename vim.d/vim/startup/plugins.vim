@@ -1,12 +1,6 @@
 call plug#begin('~/.local/share/nvim/plugged')
-    " Fastswitch (cpp/h toggle)
-    Plug 'derekwyatt/vim-fswitch', { 'for': 'cpp' }
-
     " Fuzzy file search
     Plug 'ctrlpvim/ctrlp.vim'
-
-    " Syntax checking
-    Plug 'scrooloose/syntastic'
 
     " NERDTree file navigation
     Plug 'scrooloose/nerdtree'
@@ -26,15 +20,6 @@ call plug#begin('~/.local/share/nvim/plugged')
     " Git-gutter plugin
     Plug 'airblade/vim-gitgutter'
 
-    " Dot operator for plugins
-    Plug 'tpope/vim-repeat'
-
-    " Surrounding text
-    Plug 'tpope/vim-surround'
-
-    " Pairs of keyboard mappings for common tasks
-    Plug 'tpope/vim-unimpaired'
-
     " Powerline-like lightweight status bar
     Plug 'vim-airline/vim-airline'
 
@@ -42,17 +27,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'vim-airline/vim-airline-themes'
 
     " Indentation level guides
-    " Plug 'nathanaelkane/vim-indent-guides'
-    Plug 'Yggdroot/indentLine'
-
-    " Automagically format code using system formatter
-    Plug 'Chiel92/vim-autoformat'
-
-    " Visual studio like appearance
-    Plug 'tomasiser/vim-code-dark'
-
-    " Good dark theme
-    Plug 'liuchengxu/space-vim-dark'
+    Plug 'nathanaelkane/vim-indent-guides'
 
     " Linting support for various languages
     Plug 'w0rp/ale'
@@ -62,18 +37,19 @@ call plug#begin('~/.local/share/nvim/plugged')
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'roxma/nvim-yarp'
+    Plug 'ncm2/ncm2'
+    Plug 'ncm2/ncm2-pyclang'
+    Plug 'ncm2/ncm2-bufword'
+    Plug 'ncm2/ncm2-path'
+
     Plug 'Shougo/echodoc.vim'
-    Plug 'zchee/deoplete-jedi'
 
     " Easier to see paratheses matching with this
     Plug 'luochen1990/rainbow'
 
     " Allow parsing ANSI escape sequences, useful for GTEST/PYTEST
     Plug 'powerman/vim-plugin-AnsiEsc'
-
-    " JEDI autocompletion for python
-    Plug 'davidhalter/jedi-vim'
 
     " CMake Syntax
     Plug 'pboettch/vim-cmake-syntax'
@@ -82,7 +58,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'dag/vim-fish'
 
     " COLOR SCHEMES~
-    Plug 'rakr/vim-one'
+    Plug 'chrisbra/Colorizer'
     Plug 'ayu-theme/ayu-vim'
 
     " Deal with csv files
@@ -91,23 +67,19 @@ call plug#begin('~/.local/share/nvim/plugged')
     " RIP ghc mode
     Plug 'neovimhaskell/haskell-vim'
 
-    " VCS integration across the board
-    Plug 'vim-scripts/vcscommand.vim'
+    Plug 'jceb/vim-orgmode'
+
+    Plug 'dracula/vim', { 'as': 'dracula' }
 call plug#end()
 
 "" ============================================================================
 ""                              Plugin Settings
 "" ============================================================================
-set completeopt=preview,menuone
-set completeopt-=preview
-
 let g:vim_markdown_folding_disabled = 1
 
 " Airline
-let g:airline_theme = 'one'
+let g:airline_theme = 'ayu_mirage'
 let g:airline_extensions = ['branch', 'hunks','tabline', 'ycm', 'ale']
-let g:airline#extensions#ycm#enabled = 1
-let g:airline#extensions#ale#enabled = 0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#hunks#enabled = 1
@@ -117,7 +89,7 @@ let g:airline#extensions#tabline#fnamemod = ':p:.'
 let g:airline#extensions#tabline#fnamecollapse = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline_highlighting_cache = 1
-let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#ale#enabled = 0
 let g:airline_mode_map = {
 \ '__' : '-',
 \ 'n'  : 'N',
@@ -145,17 +117,8 @@ let g:NERDTreeDirArrowExpandable="+"
 let g:NERDTreeDirArrowCollapsible="~"
 let NERDTreeIgnore = ['\.pyc$', '\.o$', '\.a$', '\.out$', '\.tsk$', '\.linux$', '^00[[dir]]']
 
-" Syntastic
-let g:syntastic_aggregate_errors = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_cpp_config_file = '.syntastic_cpp_config'
-
-" clang_complete
-let g:clang_library_path = '/opt/bb/lib/llvm-7.0/lib64/libclang.so'
-
 " Linting with ALE
-let g:ale_completion_enabled = 1
+let g:ale_completion_enabled = 0
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
@@ -163,25 +126,38 @@ let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
 let g:ale_linters = {
 \   'javascript': ['eslint'],
-\   'haskell': ['stack_build', 'hdevtools'],
-\   'cpp': ['clang-tidy-6'],
+\   'haskell': ['stack_build', 'ghc'],
+\   'cpp': ['/usr/local/opt/llvm/bin/clang-tidy'],
 \   'python': ['pylint', 'pycodestyle'],
 \   'fish': ['fish -n'],
 \   'perl': ['perl']
 \}
 let g:ale_linters_explicit = 1
-let g:ale_cpp_clang_executable = '/usr/bin/clang++-6'
+let g:ale_cpp_clang_executable = '/usr/local/opt/llvm/bin/clang'
 let g:ale_cpp_clang_options = '-std=c++14 -Wall -Werror -pedantic'
-let g:ale_cpp_clangcheck_executable = '/opt/bb/lib/llvm-6.0/bin/clang-check'
-let g:ale_cpp_cquery_executable = '~/.local/bin/cquery'
-let g:ale_cpp_clangtidy_executable = '/opt/bb/bin/clang-tidy-6'
+let g:ale_cpp_clangd_options = '-std=c++14 -Wall -Werror -pedantic'
+let g:ale_cpp_clangd_executable = '/usr/local/opt/llvm/bin/clangd'
+let g:ale_cpp_clangtidy_checks = ['clang-analyzer-*']
+let g:ale_cpp_clangtidy_executable = '/usr/local/opt/llvm/bin/clang-tidy'
+let g:ale_c_build_dir_names = ['build']
+let g:ale_c_build_dir = ['build']
 
 " Completion with LSP
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {}
 let g:LanguageClient_serverCommands.python = ['pyls']
-let g:LanguageClient_serverCommands.cpp = ['clangd-7']
-let g:LanguageClient_serverCommands.c = ['clangd-7']
+let g:LanguageClient_serverCommands.cpp = ['/usr/local/opt/llvm/bin/clangd']
+let g:LanguageClient_serverCommands.c = ['/usr/local/opt/llvm/bin/clangd']
+let g:LanguageClient_serverCommands.rust = ['~/.cargo/bin/rustup', 'run', 'stable', 'rls']
+
+" NCM2 thingies
+autocmd BufEnter * call ncm2#enable_for_buffer()
+set completeopt=noinsert,menuone,noselect
+let g:ncm2_pyclang#library_path = '/usr/local/opt/llvm/lib/libclang.dylib'
+let g:ncm2_pyclang#database_path = [
+            \ 'compile_commands.json',
+            \ 'build/compile_commands.json'
+            \ ]
 
 " Rainbow parens
 let g:rainbow_active = 1
@@ -208,23 +184,10 @@ let g:rainbow_conf = {
             \   }
             \}
 
-" Jedi configuration
-let g:jedi#usages_command = '<leader>u'
-let g:jedi#show_call_signatures = 2
-
-" Deoplete
-let g:deoplete#enable_at_startup = 1
-
 " Echodoc
 let g:echodoc#enable_at_startup = 1
 let g:echodoc#type = 'signature'
 
 let ayucolor="dark"
 
-" IndentLine {{
-let g:indentLine_char = '┣'
-let g:indentLine_first_char = '┣'
-let g:indentLine_showFirstIndentLevel = 1
-let g:indentLine_setColors = 0
-" }}
-
+let g:chromatica#libclang_path='/usr/local/opt/llvm/lib/libclang.dylib'

@@ -9,8 +9,8 @@ endif
 ""                                  Globals
 "" ============================================================================
 " Python env
-let g:python2_host_prog = '/usr/bin/python2'
-let g:python3_host_prog = '/opt/bb/bin/python3.6'
+let g:python2_host_prog = '/usr/bin/python'
+let g:python3_host_prog = '/usr/local/bin/python3'
 
 " Determine Environment
 let g:platform = GetPlatform()
@@ -57,12 +57,15 @@ set shiftwidth=4
 " 79 char maximum column width
 set colorcolumn=79
 
+" Disable autowrapping by default
+set textwidth=0 wrapmargin=0
+
 " Always draw this
 set signcolumn=yes
 
 " Underline the line at which cursor is present because I can't see a tiny green rectangle
-set cursorline
-set cursorcolumn
+" set cursorline
+" set cursorcolumn
 
 " Highlight trailing whitespaces in eye-piercing red
 highlight ExtraWhitespace ctermbg=red guibg=red
@@ -121,10 +124,6 @@ set statusline +=[%n]
 set statusline +=%f\ %h%m%r%w
 " Filetype
 set statusline +=%y
-" Name of the current function (needs taglist.vim)
-set statusline +=\ [Fun(%{tagbar#currenttag('%s','')})]
-" Name of the current branch (needs fugitive.vim)
-set statusline +=\ %{fugitive#statusline()}
 " Date of the last time the file was saved
 set statusline +=\ %{strftime(\"[%d/%m/%y\ %T]\",getftime(expand(\"%:p\")))}
 " Total number of lines in the file

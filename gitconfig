@@ -1,3 +1,7 @@
+[url "bbgithub:"]
+    insteadOf = https://bbgithub.dev.bloomberg.com
+
+
 [alias]
     ## Shortcuts
     s = status
@@ -27,7 +31,9 @@
 [core]
 	pager = less -R
     preloadindex = true
-	excludesfile = /home/vyenamandra/.gitignore
+	excludesfile = /Users/vyenamandra/.gitignore_global
+	autocrlf = input
+	safecrlf = false
 
 [mergetool]
     keepBackup = true
@@ -44,16 +50,31 @@
 
 [http]
     sslVerify = false
-
-[http "https://github.com"]
-    proxy = devproxy.bloomberg.com:82
-
-[http "https://raw.githubusercontent.com"]
-    proxy = devproxy.bloomberg.com:82
+    proxy = http://localhost:8888
 
 [user]
 	email = vyenamandra@bloomberg.net
-    name = Vaibhav Yenamandra
+	name = Vaibhav Yenamandra
 
 [include]
     path = ~/.bbgithub
+
+[sendemail]
+	smtpEncryption = tls
+	smtpServer = smtp.gmail.com
+	smtpUser = yvvaibhav@gmail.com
+    smtpServerPort = 587
+    from = vyenamandra@bloomberg.net
+
+[gui]
+	fontui = -family \"Roboto Mono\" -size 14 -weight normal -slant roman -underline 0 -overstrike 0
+	fontdiff = -family \"Roboto Mono\" -size 14 -weight normal -slant roman -underline 0 -overstrike 0
+	warndetachedcommit = true
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[commit]
+	template = /Users/vyenamandra/.stCommitMsg
