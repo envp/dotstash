@@ -6,8 +6,11 @@ bin/hub
 nodes
 tags
 tmux/plugins
-vim/autoload/plug.vim.old
-vim/view
+nvim/autoload/plug.vim.old
+nvim/view
+nvim/shada
+nvim/**/*.shada
 .mypy_cache
 
 !tmux/plugins/tpm
+.mypy_cache
