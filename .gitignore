@@ -8,5 +8,6 @@ tags
 tmux/plugins
 vim/autoload/plug.vim.old
 vim/view
+.mypy_cache
 
 !tmux/plugins/tpm
