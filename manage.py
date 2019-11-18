@@ -1,25 +1,47 @@
 #!/usr/bin/env python3
-
+import os
 import sys
+import shutil
+
 from argparse import ArgumentParser, Namespace
 
+
+def absolutePath(path):
+    """Return the absoute"""
+    return os.path.abspath(os.path.expanduser(path))
+
+
 # This controls where which file or directory goes
-DESTINATIONS = {
-    "nvim": "~/.config/nvim",
-    "fish": "~/.config/fish",
-    "stack": "~/.config/stack",
-    "gitconfig": "~/.gitconfig",
+# Each Key-Value pair must be unique and invertible
+INSTALL_DESTINATIONS = {
+    absolutePath("./nvim"): absolutePath("~/.config/nvim"),
+    absolutePath("./fish"): absolutePath("~/.config/fish"),
+    absolutePath("./stack"): absolutePath("~/.config/stack"),
+    absolutePath("./gitconfig"): absolutePath("~/.gitconfig"),
 }
 
+BACKUP_TARGETS = {v: k for k, v in INSTALL_DESTINATIONS.items()}
 
-def installFiles():
+
+def installFiles() -> None:
     """Install our dotfiles to their respective locations"""
-    pass
+    for src, dest in INSTALL_DESTINATIONS.items():
+        if os.path.isfile(src):
+            shutil.copy2(src, dest)
+        elif os.path.isdir(src):
+            shutil.copytree(src, dest)
 
 
-def backupFiles():
+def backupFiles() -> None:
     """Back up our dotfiles from their respective locations"""
-    pass
+    for src, dest in BACKUP_TARGETS.items():
+        if os.path.isfile(src):
+            shutil.copy2(src, dest)
+        elif os.path.isdir(src):
+            try:
+                shutil.copytree(src, dest)
+            except FileExistsError:
+                shutil.rmtree(dest)
 
 
 def main(opts: Namespace):
