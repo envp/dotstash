@@ -11,9 +11,6 @@ call plug#begin('~/.local/share/nvim/plugged')
     " Comment/uncomment operator
     Plug 'tpope/vim-commentary'
 
-    " Surrounding stuff with other stuff
-    Plug 'tpope/vim-surround'
-
     " Git features
     Plug 'tpope/vim-fugitive'
 
@@ -71,7 +68,6 @@ call plug#begin('~/.local/share/nvim/plugged')
 
     Plug 'dracula/vim', { 'as': 'dracula' }
 call plug#end()
-
 "" ============================================================================
 ""                              Plugin Settings
 "" ============================================================================
@@ -106,7 +102,7 @@ let g:airline_section_z = '%3p%% %l/%L:%3v'
 " CtrlP
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_root_markers = ['.git']
-let g:ctrlp_user_command = ['.git', 'rg --files-with-matches ".*" %s', 'find %s -type f']
+let g:ctrlp_user_command = ['ag --hidden -U --ignore .git -g %s', 'find %s -type f']
 
 
 " GitGutter
@@ -115,7 +111,7 @@ let g:gitgutter_max_signs=9999
 " NERDTree
 let g:NERDTreeDirArrowExpandable="+"
 let g:NERDTreeDirArrowCollapsible="~"
-let NERDTreeIgnore = ['\.pyc$', '\.o$', '\.a$', '\.out$', '\.tsk$', '\.linux$', '^00[[dir]]']
+let NERDTreeIgnore = ['\.pyc$', '\.o$', '\.a$', '\.tsk$', '\.linux$']
 
 " Linting with ALE
 let g:ale_completion_enabled = 0
@@ -145,7 +141,7 @@ let g:ale_c_build_dir = ['build']
 " Completion with LSP
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {}
-let g:LanguageClient_serverCommands.python = ['pyls']
+let g:LanguageClient_serverCommands.python = ['python', '-m', 'pyls']
 let g:LanguageClient_serverCommands.cpp = ['/usr/local/opt/llvm/bin/clangd']
 let g:LanguageClient_serverCommands.c = ['/usr/local/opt/llvm/bin/clangd']
 let g:LanguageClient_serverCommands.rust = ['~/.cargo/bin/rustup', 'run', 'stable', 'rls']

@@ -139,6 +139,7 @@ set listchars=tab:>-,trail:-
 set list!
 
 " Incremental Search and Highlighting Results
+set inccommand=nosplit
 set incsearch
 set hlsearch
 set showmatch

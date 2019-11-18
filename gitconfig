@@ -1,6 +1,8 @@
 [url "bbgithub:"]
     insteadOf = https://bbgithub.dev.bloomberg.com
 
+[url "https://github.com/"]
+    insteadOf = github:
 
 [alias]
     ## Shortcuts
@@ -29,11 +31,10 @@
     diff = true
 
 [core]
-	pager = less -R
+    pager = less -R
     preloadindex = true
 	excludesfile = /Users/vyenamandra/.gitignore_global
-	autocrlf = input
-	safecrlf = false
+    autocrlf = input
 
 [mergetool]
     keepBackup = true
@@ -44,32 +45,19 @@
 [grep]
     lineNumber = true
 
-[hub]
-    host = bbgithub.dev.bloomberg.com
-    protocol = https
-
-[http]
-    sslVerify = false
-    proxy = http://localhost:8888
-
 [user]
 	email = vyenamandra@bloomberg.net
 	name = Vaibhav Yenamandra
 
-[include]
-    path = ~/.bbgithub
-
 [sendemail]
-	smtpEncryption = tls
-	smtpServer = smtp.gmail.com
-	smtpUser = yvvaibhav@gmail.com
+    smtpEncryption = tls
+    smtpServer = smtp.gmail.com
+    smtpUser = yvvaibhav@gmail.com
     smtpServerPort = 587
     from = vyenamandra@bloomberg.net
-
 [gui]
-	fontui = -family \"Roboto Mono\" -size 14 -weight normal -slant roman -underline 0 -overstrike 0
-	fontdiff = -family \"Roboto Mono\" -size 14 -weight normal -slant roman -underline 0 -overstrike 0
-	warndetachedcommit = true
+	fontui = -family \"Helvetica Neue\" -size 14 -weight normal -slant roman -underline 0 -overstrike 0
+	fontdiff = -family \"Roboto Mono for Powerline\" -size 14 -weight normal -slant roman -underline 0 -overstrike 0
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
