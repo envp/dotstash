@@ -29,7 +29,11 @@ def installFiles() -> None:
         if os.path.isfile(src):
             shutil.copy2(src, dest)
         elif os.path.isdir(src):
-            shutil.copytree(src, dest)
+            try:
+                shutil.copytree(src, dest)
+            except FileExistsError:
+                shutil.rmtree(dest)
+                shutil.copytree(src, dest)
 
 
 def backupFiles() -> None:
@@ -42,6 +46,7 @@ def backupFiles() -> None:
                 shutil.copytree(src, dest)
             except FileExistsError:
                 shutil.rmtree(dest)
+                shutil.copytree(src, dest)
 
 
 def main(opts: Namespace):
