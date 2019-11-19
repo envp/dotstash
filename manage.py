@@ -1,13 +1,23 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3.7
 import os
 import sys
 import shutil
 import contextlib
 import logging
+import enum
+
+try:
+    import coloredlogs
+except ImportError:
+    print(
+        "Unable to import `coloredlogs`; try: `pip3.7 install --upgrade coloredlogs`"
+    )
 
 from argparse import ArgumentParser, Namespace
 
 SCRIPT_DIR = os.path.dirname(__file__)
+
+LOGGER = logging.getLogger(__name__)
 
 
 def absolutePath(path, base=None):
@@ -49,12 +59,18 @@ def installFiles() -> None:
     """Install our dotfiles to their respective locations"""
     for src, dest in INSTALL_DESTINATIONS.items():
         if os.path.isfile(src):
+            LOGGER.info("Copying file: %s -> %s", src, dest)
             with contextlib.suppress(shutil.SameFileError):
                 shutil.copy2(src, dest)
         elif os.path.isdir(src):
             try:
-                shutil.copytree(src, dest)
+                LOGGER.info("Copying directory: %s -> %s", src, dest)
+                with contextlib.suppress(shutil.SameFileError):
+                    shutil.copytree(src, dest)
             except FileExistsError:
+                LOGGER.info(
+                    "Destination exists, retrying after deleting destination"
+                )
                 shutil.rmtree(dest)
                 shutil.copytree(src, dest)
 
@@ -63,16 +79,20 @@ def backupFiles() -> None:
     """Back up our dotfiles from their respective locations"""
     for src, dest in BACKUP_TARGETS.items():
         if os.path.isfile(src):
+            LOGGER.info("Copying file: %s -> %s", src, dest)
             with contextlib.suppress(shutil.SameFileError):
                 shutil.copy2(src, dest)
         elif os.path.isdir(src):
             try:
-                shutil.copytree(src, dest)
+                LOGGER.info("Copying directory: %s -> %s", src, dest)
+                with contextlib.suppress(shutil.SameFileError):
+                    shutil.copytree(src, dest)
             except FileExistsError:
+                LOGGER.info(
+                    "Destination exists, retrying after deleting destination"
+                )
                 shutil.rmtree(dest)
                 shutil.copytree(src, dest)
-            except shutil.SameFileError:
-                continue
 
 
 def main(opts: Namespace):
@@ -110,9 +130,10 @@ def genParser() -> ArgumentParser:
 
 
 def configureLogging():
-    logging.basicConfig
+    coloredlogs.install(level="INFO", logger=LOGGER)
 
 
 if __name__ == "__main__":
     parser = genParser()
+    configureLogging()
     main(parser.parse_args(sys.argv[1:]))
