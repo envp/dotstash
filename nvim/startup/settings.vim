@@ -9,8 +9,15 @@ endif
 ""                                  Globals
 "" ============================================================================
 " Python env
-let g:python2_host_prog = '/usr/bin/python'
-let g:python3_host_prog = '/usr/local/bin/python3'
+if executable('python') > 0
+    let g:python2_host_prog = 'python'
+endif
+
+if executable('python3.7') > 0
+    let g:python3_host_prog = 'python3.7'
+elseif executable('python3') > 0
+    let g:python3_host_prog = 'python3'
+endif
 
 " Determine Environment
 let g:platform = GetPlatform()

@@ -103,9 +103,9 @@ let NERDTreeIgnore = ['\.pyc$', '\.o$', '\.a$', '\.tsk$', '\.linux$']
 " Completion with LSP
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {}
-let g:LanguageClient_serverCommands.python = ['/usr/local/bin/pyls', '--log-file', 'pyls.log']
-let g:LanguageClient_serverCommands.cpp = ['/usr/local/opt/llvm/bin/clangd']
-let g:LanguageClient_serverCommands.c = ['/usr/local/opt/llvm/bin/clangd']
+let g:LanguageClient_serverCommands.python = ['pyls']
+let g:LanguageClient_serverCommands.cpp = ['clangd']
+let g:LanguageClient_serverCommands.c = ['clangd']
 let g:LanguageClient_serverCommands.rust = ['~/.cargo/bin/rustup', 'run', 'stable', 'rls']
 
 " NCM2 thingies
