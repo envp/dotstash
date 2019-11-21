@@ -6,7 +6,6 @@ import shlex
 import contextlib
 import logging
 import subprocess
-import enum
 
 from typing import Dict
 from argparse import ArgumentParser, Namespace
