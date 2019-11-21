@@ -9,12 +9,6 @@ import subprocess
 import enum
 
 from typing import Dict
-
-try:
-    import coloredlogs
-except ImportError:
-    print("Unable to import `coloredlogs`; try: `pip3.7 install --upgrade coloredlogs`")
-
 from argparse import ArgumentParser, Namespace
 
 SCRIPT_DIR = os.path.dirname(__file__)
@@ -130,8 +124,11 @@ def genParser() -> ArgumentParser:
 
 
 def configureLogging():
-    coloredlogs.install(level="INFO", logger=LOGGER)
-
+    try:
+        import coloredlogs
+        coloredlogs.install(level="INFO", logger=LOGGER)
+    except ModuleNotFoundError:
+        print("Unable to import `coloredlogs`; try: `pip3.7 install --upgrade coloredlogs`")
 
 if __name__ == "__main__":
     parser = genParser()
