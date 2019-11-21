@@ -11,7 +11,7 @@ source "$DIR/bash/funcs.sh"
 source "$DIR/bash/aliases.sh"
 source "$DIR/bash/prompt.sh"
 
-bind -f "$DIR/inputrc"
+bind -f "$DIR/.inputrc"
 
 # BCPC VM configuration
 export no_proxy=$no_proxy,blp-dpkg.dev.bloomberg.com

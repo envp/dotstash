@@ -41,6 +41,7 @@ INSTALL_DESTINATIONS = {
     # Fish
     scriptRelPath("./fish"): absolutePath("~/.config/fish"),
     # Bash
+    scriptRelPath("./bash/bash"): absolutePath("~/bash"),
     scriptRelPath("./bash/bashrc"): absolutePath("~/.bashrc"),
     scriptRelPath("./bash/bash_profile"): absolutePath("~/.bash_profile"),
     scriptRelPath("./bash/bbprofile"): absolutePath("~/.bbprofile"),

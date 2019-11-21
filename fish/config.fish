@@ -2,7 +2,9 @@ function fish_greeting
     # Probably find a way to cache this so that we don't query this as
     # frequently
     curl --max-time 0.5 -f "wttr.in/?m" -z /tmp/wttr 2>/dev/null | sed -ne '2,$p;7q'
-    gshuf -n 1 ~/.local/share/bofh/excuses
+    if type -q gshuf
+        gshuf -n 1 ~/.local/share/bofh/excuses
+    end
 end
 
 function fish_prompt

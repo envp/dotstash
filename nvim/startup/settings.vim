@@ -103,13 +103,10 @@ set wildmenu
 set wildmode=list:longest
 
 " Ignoring files (see :help wildignore)
-set wildignore+=*.o,*.d,nohup.out,tags,.hs-tags,*.hi,*.gcno,*.gcda,*.fasl,*.pyc
+set wildignore+=*/.git/*,*/tmp/*,*/build/*,*.o,nohup.out,*.pyc
 
 " Number of lines to scroll past when the cursor scrolls off the screen
 set scrolloff=8
-
-" Tool to use for Grepper
-set grepprg="git"
 
 "" ============================================================================
 ""                                Appearances

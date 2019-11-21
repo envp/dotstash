@@ -89,7 +89,17 @@ let g:airline_section_z = '%3p%% %l/%L:%3v'
 " CtrlP
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_root_markers = ['.git']
-let g:ctrlp_user_command = ['ag --hidden -U --ignore .git -g %s', 'find %s -type f']
+if executable('rg')
+    set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+    let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+    let g:ctrlp_use_caching = 0
+elseif executable('ag')
+    let g:ctrlp_user_command = 'ag --hidden -U --ignore .git -g %s'
+    let g:ctrlp_use_caching = 0
+else
+    let g:ctrlp_user_command = 'find %s -type f'
+    let g:ctrlp_use_caching = 1
+endif
 
 
 " GitGutter
