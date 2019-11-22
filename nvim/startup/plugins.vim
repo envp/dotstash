@@ -54,6 +54,8 @@ call plug#begin('~/.local/share/nvim/plugged')
 
     Plug 'jceb/vim-orgmode'
     Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+
+    Plug 'NLKNguyen/papercolor-theme'
 call plug#end()
 "" ============================================================================
 ""                              Plugin Settings
@@ -61,7 +63,7 @@ call plug#end()
 let g:vim_markdown_folding_disabled = 1
 
 " Airline
-let g:airline_theme = 'ayu_mirage'
+let g:airline_theme = 'papercolor'
 let g:airline_extensions = ['branch', 'hunks','tabline', 'coc']
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#branch#enabled = 1
