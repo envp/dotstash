@@ -9,8 +9,18 @@ source ~/.config/nvim/startup/plugins.vim
 source ~/.config/nvim/startup/settings.vim
 source ~/.config/nvim/startup/mappings.vim
 
-" let ayucolor="dark"
-" colorscheme ayu
+let g:PaperColor_Theme_Options = {
+  \   'theme': {
+  \     'default': {
+  \       'override' : {
+  \         'color00' : ['#DADADA', ''],
+  \         'vertsplit_bg' : ['#DADADA', ''],
+  \         'linenumber_bg' : ['#DADADA', ''],
+  \         'cursorcolumn' : ['#FF005F', ''],
+  \       }
+  \     }
+  \   }
+  \ }
 set background=light
 colorscheme PaperColor
 
@@ -18,6 +28,6 @@ colorscheme PaperColor
 source ~/.config/nvim/startup/overrides/common.vim
 
 " Overrides for specific schemes
-if get(g:, 'colors_name', 'default') == "ayu" && get(g:, 'ayucolor', 'none') == 'dark'
+if get(g:, 'colors_name', 'default') == 'ayu' && get(g:, 'ayucolor', 'none') == 'dark'
     source ~/.config/nvim/startup/overrides/ayu.vim
 endif
