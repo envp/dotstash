@@ -16,7 +16,7 @@ let g:PaperColor_Theme_Options = {
   \         'color00' : ['#DADADA', ''],
   \         'vertsplit_bg' : ['#DADADA', ''],
   \         'linenumber_bg' : ['#DADADA', ''],
-  \         'cursorcolumn' : ['#FF005F', ''],
+  \         'cursorcolumn' : ['#DD5D5D', ''],
   \       }
   \     }
   \   }
