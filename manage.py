@@ -46,10 +46,6 @@ INSTALL_DESTINATIONS = {
     scriptRelPath("./bash/bash_profile"): absolutePath("~/.bash_profile"),
     scriptRelPath("./bash/bbprofile"): absolutePath("~/.bbprofile"),
     scriptRelPath("./bash/inputrc"): absolutePath("~/.inputrc"),
-    # DPKG
-    scriptRelPath("./builddeb.conf"): absolutePath("~/.builddeb.conf"),
-    # Stack
-    scriptRelPath("./stack"): absolutePath("~/.config/stack"),
     # Git
     scriptRelPath("./gitconfig"): absolutePath("~/.gitconfig"),
     # GDB
