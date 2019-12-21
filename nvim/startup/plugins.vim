@@ -51,11 +51,14 @@ call plug#begin('~/.local/share/nvim/plugged')
 
     " Deal with csv files
     Plug 'chrisbra/csv.vim'
+    Plug 'chrisbra/Colorizer'
 
     Plug 'jceb/vim-orgmode'
     Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 
     Plug 'NLKNguyen/papercolor-theme'
+
+    Plug 'leafgarland/typescript-vim'
 call plug#end()
 "" ============================================================================
 ""                              Plugin Settings
@@ -119,6 +122,8 @@ let g:LanguageClient_serverCommands.python = ['pyls']
 let g:LanguageClient_serverCommands.cpp = ['clangd']
 let g:LanguageClient_serverCommands.c = ['clangd']
 let g:LanguageClient_serverCommands.rust = ['~/.cargo/bin/rustup', 'run', 'stable', 'rls']
+let g:LanguageClient_serverCommands.javascript = ['typescript-language-server', '--stdio']
+let g:LanguageClient_serverCommands.typescript = ['typescript-language-server', '--stdio']
 
 " NCM2 thingies
 autocmd BufEnter * call ncm2#enable_for_buffer()

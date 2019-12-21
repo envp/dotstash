@@ -11,7 +11,7 @@ source ~/.config/nvim/startup/mappings.vim
 
 let g:PaperColor_Theme_Options = {
   \   'theme': {
-  \     'default': {
+  \     'default.dark': {
   \       'override' : {
   \         'color00' : ['#DADADA', ''],
   \         'vertsplit_bg' : ['#DADADA', ''],
@@ -30,4 +30,8 @@ source ~/.config/nvim/startup/overrides/common.vim
 " Overrides for specific schemes
 if get(g:, 'colors_name', 'default') == 'ayu' && get(g:, 'ayucolor', 'none') == 'dark'
     source ~/.config/nvim/startup/overrides/ayu.vim
+endif
+
+if get(g:, 'colors_name', 'default') == 'PaperColor'
+    source ~/.config/nvim/startup/overrides/papercolor-light.vim
 endif
