@@ -1,12 +1,3 @@
-function fish_greeting
-    # Probably find a way to cache this so that we don't query this as
-    # frequently
-    curl --max-time 0.5 -f "wttr.in/?m" -z /tmp/wttr 2>/dev/null | sed -ne '2,$p;7q'
-    if type -q gshuf
-        gshuf -n 1 ~/.local/share/bofh/excuses
-    end
-end
-
 function fish_prompt
     # Set up variables that we want to use
     set -l color_cwd brcyan
@@ -46,18 +37,6 @@ function fish_prompt
         "$suffix"
 end
 
-function proxrun --description "Run a command with proxy env vars set"
-    begin;
-        set -lx ALL_PROXY 'http://proxy.bloomberg.com:77'
-        set -lx HTTP_PROXY 'http://proxy.bloomberg.com:77'
-        set -lx HTTPS_PROXY 'http://proxy.bloomberg.com:77'
-        set -lx http_proxy 'http://proxy.bloomberg.com:77'
-        set -lx https_proxy 'http://proxy.bloomberg.com:77'
-
-        eval $argv
-    end
-end
-
 set -gx EDITOR nvim
 
 ##
@@ -68,16 +47,7 @@ set __fish_git_prompt_color_branch brmagenta
 set __fish_git_prompt_color_upstream_ahead brgreen
 set __fish_git_prompt_color_upstream_behind brred
 
-##
-## Perl
-##
-set -x PATH $HOME/Library/Python/3.7/bin /Applications/Postgres.app/Contents/Versions/latest/bin $PATH;
-set -q PERL5LIB; and set -x PERL5LIB /home/vyenamandra/perl5/lib/perl5:$PERL5LIB;
-set -q PERL5LIB; or set -x PERL5LIB /home/vyenamandra/perl5/lib/perl5;
-set -q PERL_LOCAL_LIB_ROOT; and set -x PERL_LOCAL_LIB_ROOT /home/vyenamandra/perl5:$PERL_LOCAL_LIB_ROOT;
-set -q PERL_LOCAL_LIB_ROOT; or set -x PERL_LOCAL_LIB_ROOT /home/vyenamandra/perl5;
-set -x PERL_MB_OPT --install_base\ \"/home/vyenamandra/perl5\";
-set -x PERL_MM_OPT INSTALL_BASE=/home/vyenamandra/perl5;
+set -x PATH $HOME/.local/bin $PATH;
 
 set -gx LESS_TERMCAP_mb (set_color -o brblue)
 set -gx LESS_TERMCAP_md (set_color -o bryellow)
