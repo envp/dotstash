@@ -43,6 +43,7 @@ set autoindent
 set cindent
 set hidden
 set noshowmode
+set nospell
 set backspace=indent,eol,start
 
 " Get rid of terminal bell sound
