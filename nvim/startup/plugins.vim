@@ -1,7 +1,4 @@
 call plug#begin('~/.local/share/nvim/plugged')
-    " Fuzzy file search
-    Plug 'ctrlpvim/ctrlp.vim'
-
     " NERDTree file navigation
     Plug 'scrooloose/nerdtree'
 
@@ -51,9 +48,14 @@ call plug#begin('~/.local/share/nvim/plugged')
 
     " Deal with csv files
     Plug 'chrisbra/csv.vim'
+    Plug 'chrisbra/Colorizer'
 
     Plug 'jceb/vim-orgmode'
     Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+
+    Plug 'NLKNguyen/papercolor-theme'
+
+    Plug 'leafgarland/typescript-vim'
 call plug#end()
 "" ============================================================================
 ""                              Plugin Settings
@@ -61,7 +63,7 @@ call plug#end()
 let g:vim_markdown_folding_disabled = 1
 
 " Airline
-let g:airline_theme = 'ayu_mirage'
+let g:airline_theme = 'papercolor'
 let g:airline_extensions = ['branch', 'hunks','tabline', 'coc']
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#branch#enabled = 1
@@ -87,19 +89,19 @@ let g:airline_mode_map = {
 let g:airline_section_z = '%3p%% %l/%L:%3v'
 
 " CtrlP
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_root_markers = ['.git']
-if executable('rg')
-    set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
-    let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-    let g:ctrlp_use_caching = 0
-elseif executable('ag')
-    let g:ctrlp_user_command = 'ag --hidden -U --ignore .git -g %s'
-    let g:ctrlp_use_caching = 0
-else
-    let g:ctrlp_user_command = 'find %s -type f'
-    let g:ctrlp_use_caching = 1
-endif
+"let g:ctrlp_working_path_mode = 'ra'
+"let g:ctrlp_root_markers = ['.git']
+"if executable('rg')
+"    set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+"    let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+"    let g:ctrlp_use_caching = 0
+"elseif executable('ag')
+"    let g:ctrlp_user_command = 'ag --hidden -U --ignore .git -g %s'
+"    let g:ctrlp_use_caching = 0
+"else
+"    let g:ctrlp_user_command = 'find %s -type f'
+"    let g:ctrlp_use_caching = 1
+"endif
 
 
 " GitGutter
@@ -112,11 +114,15 @@ let NERDTreeIgnore = ['\.pyc$', '\.o$', '\.a$', '\.tsk$', '\.linux$']
 
 " Completion with LSP
 let g:LanguageClient_autoStart = 1
-let g:LanguageClient_serverCommands = {}
+let g:LanguageClient_serverCommands = {
+\    'typescript.tsx': ['typescript-language-server', '--stdio']
+\ }
 let g:LanguageClient_serverCommands.python = ['pyls']
 let g:LanguageClient_serverCommands.cpp = ['clangd']
 let g:LanguageClient_serverCommands.c = ['clangd']
 let g:LanguageClient_serverCommands.rust = ['~/.cargo/bin/rustup', 'run', 'stable', 'rls']
+let g:LanguageClient_serverCommands.javascript = ['typescript-language-server', '--stdio']
+let g:LanguageClient_serverCommands.typescript = ['typescript-language-server', '--stdio']
 
 " NCM2 thingies
 autocmd BufEnter * call ncm2#enable_for_buffer()
@@ -152,8 +158,8 @@ let g:rainbow_conf = {
             \   }
             \}
 
-" Echodoc
-let g:echodoc#enable_at_startup = 1
-let g:echodoc#type = 'signature'
+" FZF
+set rtp+=/usr/local/opt/fzf
+map <C-p> :FZF<CR>
 
 let ayucolor="dark"

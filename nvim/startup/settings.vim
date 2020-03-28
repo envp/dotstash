@@ -43,6 +43,7 @@ set autoindent
 set cindent
 set hidden
 set noshowmode
+set nospell
 set backspace=indent,eol,start
 
 " Get rid of terminal bell sound
@@ -161,11 +162,11 @@ autocmd QuickFixCmdPost *make* cwindow
 " Make
 autocmd FileType make setlocal noexpandtab shiftwidth=8
 
-" XML
-autocmd FileType xml setlocal equalprg=xmllint\ --format\ -
-
 " Markdown
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+
+" TypeScript
+autocmd BufNewFile,BufReadPost *.ts set filetype=typescript
 
 " AutoSave/AutoLoad views and folds etc
 " autocmd BufWinLeave *.* mkview

@@ -69,4 +69,9 @@ set -gx PIPENV_PYPI_MIRROR 'https://artprod.dev.bloomberg.com/artifactory/api/py
 set -gx no_proxy 'localhost,.dev.bloomberg.com,127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,blp-dpkg.dev.bloomberg.com,.dev.obdc.bcs.bloomberg.com,.bpaas1sn2.dev.bloomberg.com,dob1.bcpc.bloomberg.com'
 
 alias antlr4=antlr
-set -gx fish_user_paths ~/.local/bin/ ~/.cargo/bin /usr/local/opt/llvm/bin /usr/local/sbin /usr/local/opt/tcl-tk/bin $fish_user_paths
+set -gx fish_user_paths ~/.local/bin/ ~/.cargo/bin /usr/local/opt/llvm/bin /usr/local/opt/gnu-sed/libexec/gnubin /usr/local/opt/grep/libexec/gnubin /usr/local/sbin /usr/local/opt/tcl-tk/bin $fish_user_paths
+
+# Non standard extensions to $path
+set -g fish_user_paths "/usr/local/opt/ruby/bin" $fish_user_paths
+set -g fish_user_paths "/usr/local/opt/libiconv/bin" $fish_user_paths
+set -g fish_user_paths "/usr/local/opt/sqlite/bin" $fish_user_paths

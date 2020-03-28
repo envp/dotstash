@@ -6,7 +6,6 @@ import shlex
 import contextlib
 import logging
 import subprocess
-import enum
 
 from typing import Dict
 from argparse import ArgumentParser, Namespace
@@ -52,6 +51,10 @@ INSTALL_DESTINATIONS = {
     scriptRelPath("./gdbinit"): absolutePath("~/.gdbinit"),
     # tmux
     scriptRelPath("./tmux.conf"): absolutePath("~/.tmux.conf"),
+    # alacritty
+    scriptRelPath("./alacritty/alacritty.yml"): absolutePath(
+        "~/.config/alacritty/alacritty.yml"
+    ),
 }
 
 BACKUP_TARGETS = {v: k for k, v in INSTALL_DESTINATIONS.items()}
@@ -71,7 +74,9 @@ def copyFilesBySpec(spec: Dict[str, str]):
                 with contextlib.suppress(shutil.SameFileError):
                     shutil.copytree(src, dest)
             except FileExistsError:
-                LOGGER.info("Destination exists, retrying after deleting destination")
+                LOGGER.info(
+                    "Destination exists, retrying after deleting destination"
+                )
                 shutil.rmtree(dest)
                 shutil.copytree(src, dest)
 
@@ -123,9 +128,13 @@ def genParser() -> ArgumentParser:
 def configureLogging():
     try:
         import coloredlogs
+
         coloredlogs.install(level="INFO", logger=LOGGER)
     except ModuleNotFoundError:
-        print("Unable to import `coloredlogs`; try: `pip3.7 install --upgrade coloredlogs`")
+        print(
+            "Unable to import `coloredlogs`; try: `pip3.7 install --upgrade coloredlogs`"
+        )
+
 
 if __name__ == "__main__":
     parser = genParser()

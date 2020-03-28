@@ -1,9 +1,6 @@
 [url "bbgithub:"]
     insteadOf = https://bbgithub.dev.bloomberg.com
 
-[url "https://github.com/"]
-    insteadOf = github:
-
 [alias]
     ## Shortcuts
     s = status
@@ -33,7 +30,7 @@
 [core]
     pager = less -R
     preloadindex = true
-	excludesfile = /Users/vyenamandra/.gitignore_global
+    excludesfile = /Users/vyenamandra/.gitignore_global
     autocrlf = input
 
 [mergetool]
@@ -45,24 +42,14 @@
 [grep]
     lineNumber = true
 
-[user]
-	email = vyenamandra@bloomberg.net
-	name = Vaibhav Yenamandra
-
 [sendemail]
     smtpEncryption = tls
     smtpServer = smtp.gmail.com
     smtpUser = yvvaibhav@gmail.com
     smtpServerPort = 587
     from = vyenamandra@bloomberg.net
-[gui]
-	fontui = -family \"Helvetica Neue\" -size 14 -weight normal -slant roman -underline 0 -overstrike 0
-	fontdiff = -family \"Roboto Mono for Powerline\" -size 14 -weight normal -slant roman -underline 0 -overstrike 0
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
 [mergetool "sourcetree"]
-	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
-[commit]
-	template = /Users/vyenamandra/.stCommitMsg
