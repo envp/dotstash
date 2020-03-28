@@ -48,9 +48,6 @@
     smtpUser = yvvaibhav@gmail.com
     smtpServerPort = 587
     from = vyenamandra@bloomberg.net
-[user]
-	name = Vaibhav Yenamandra
-	email = vyenamandra@bloomberg.net
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
