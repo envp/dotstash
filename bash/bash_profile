@@ -1,6 +1,0 @@
-source /etc/profile.d/01-locale-fix.sh
-source /etc/profile.d/lang.sh
-
-source ~/.bashrc
-
-export PATH="$HOME/.cargo/bin:$PATH"

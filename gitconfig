@@ -1,40 +1,19 @@
-[url "bbgithub:"]
-    insteadOf = https://bbgithub.dev.bloomberg.com
-
 [alias]
     ## Shortcuts
     s = status
     d = diff
     co = checkout
     cm = commit
+    ls = ls-files
 
     # List aliases
     la = "!git config -l | grep alias | cut -c 7-"
 
-    ## More complex stuff
-    # Current git branch
-    cb = rev-parse --abbrev-ref HEAD
-
     # Show a graph for all of the commits
     lg = log --decorate --oneline --graph --branches --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold blue)(%ar) %C(bold yellow)%d%C(reset) %C(green)%s%C(reset) %C(dim green)- %an%C(reset)'
 
-    # Shwo only the commits accessible from this branch
+    # Show only the commits accessible from this branch
     lo = log --oneline --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold blue)(%ar) %C(bold yellow)%d%C(reset) %C(green)%s%C(reset) %C(dim green)- %an%C(reset)'
-
-[color]
-    ui = true
-    status = true
-    branch = true
-    diff = true
-
-[core]
-    pager = less -R
-    preloadindex = true
-    excludesfile = /Users/vyenamandra/.gitignore_global
-    autocrlf = input
-
-[mergetool]
-    keepBackup = true
 
 [push]
     default = simple
@@ -42,14 +21,8 @@
 [grep]
     lineNumber = true
 
-[sendemail]
-    smtpEncryption = tls
-    smtpServer = smtp.gmail.com
-    smtpUser = yvvaibhav@gmail.com
-    smtpServerPort = 587
-    from = vyenamandra@bloomberg.net
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	trustExitCode = true
+[core]
+    pager = less -R
+    preloadindex = true
+    excludesfile = /Users/vyenamandra/.gitignore_global
+    autocrlf = input
