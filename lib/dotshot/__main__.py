@@ -8,9 +8,9 @@ from datetime import datetime, timezone
 
 from . import system
 
-def parse_args(args, **kwds):
-    parser = argparse.ArgumentParser(*args, **kwargs)
-    group = self.add_mutually_exclusive_group()
+def parse_args(args, **kwargs):
+    parser = argparse.ArgumentParser(**kwargs)
+    group = parser.add_mutually_exclusive_group()
     group.add_argument(
         '--backup', type=str, nargs=1, metavar='PATH',
         help="Backup dotfiles and system configuration to given path")
