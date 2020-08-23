@@ -1,9 +1,9 @@
 """Wrappers for interactions with the homebrew package manager"""
 import logging
 
-from ... import shell
+from .cmd_utils import BinaryDependent, ShellCommand
 
-class Homebrew(shell.BinaryDependent, binary="brew", platform="darwin"):
+class Homebrew(BinaryDependent, binary="brew", platform="darwin"):
     """Wraps `brew` so that cask, and non-cask dependencies can be queried for
     """
     @classmethod
@@ -12,7 +12,7 @@ class Homebrew(shell.BinaryDependent, binary="brew", platform="darwin"):
         This finds the leaves in the inverse dependency graph
         """
         logging.info("Reading `brew` installations")
-        cmd = shell.ShellCommand([cls.binary, "deps", "--installed"])
+        cmd = ShellCommand([cls.binary, "deps", "--installed"])
         roots = set()
         dependents = set()
         
@@ -37,7 +37,7 @@ class Homebrew(shell.BinaryDependent, binary="brew", platform="darwin"):
     def installedCaskDeps(cls):
         roots = set()
         logging.info("Reading `brew cask` installations")
-        outputLines = shell.ShellCommand([cls.binary, "cask", "list"]).run()
+        outputLines = ShellCommand([cls.binary, "cask", "list"]).run()
         if not outputLines:
             return roots
         # brew cask list uses its own format

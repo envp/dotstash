@@ -8,16 +8,16 @@ echo Created temporary workspace "${workspace}"
 
 if which python3 > /dev/null 2>&1; then
     # Create a virtual environment for our deps
-    python3 -m venv "${workspace}"
-    source "${workspace}/bin/activate"
+    python3 -m venv "${workspace}";
+    source "${workspace}/bin/activate";
     # Install said deps
-    pip3 install -U -I pip -r "${SCRIPT_DIR}/requirements.txt"
+    pip3 install -U -I pip -r "${SCRIPT_DIR}/requirements.txt";
     # Run application with arguments given to this script
-    PYTHONPATH="${SCRIPT_DIR}/lib" python3 -m dotshot "$@"
+    PYTHONPATH="${SCRIPT_DIR}/lib" python3 -m dotstash "$@";
     # Deactivate environment
-    deactivate
+    deactivate;
     # Clean up
-    rm -rf "${workspace}"
+    rm -rf "${workspace}";
 else
     echo No python3 found on $PATH
 fi
