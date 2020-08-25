@@ -1,10 +1,8 @@
 import os
 import sys
-import json
 import yaml
 import logging
 import argparse
-import enum
 
 from datetime import datetime
 
@@ -35,20 +33,15 @@ class ReadManifest(argparse.Action):
 def configure_parser(**kwargs):
     parser = argparse.ArgumentParser(**kwargs)
     subparsers = parser.add_subparsers(help="Available subcommands")
-    backup_parser = subparsers.add_parser(
-        "backup", help="Backup dotfiles to a given location"
-    )
+    backup_parser = subparsers.add_parser("backup", help="Backup dotfiles to a given location")
     backup_parser.add_argument(
         "--manifest",
         action=ReadManifest,
         nargs="+",
-        help="Paths to files that specify package names "
-        "and associated files to backup",
+        help="Paths to files that specify package names " "and associated files to backup",
     )
     backup_parser.set_defaults(backup=True)
-    install_parser = subparsers.add_parser(
-        "install", help="Install dotfiles from a given bundle"
-    )
+    install_parser = subparsers.add_parser("install", help="Install dotfiles from a given bundle")
     install_parser.set_defaults(install=True)
     return parser
 
@@ -61,8 +54,7 @@ def parse_args(args, **kwargs):
 
 if __name__ == "__main__":
     logging.basicConfig(
-        format="%(asctime)s|%(levelname)-8s|%(message)s|",
-        level=os.getenv("PYTHON_LOGLEVEL", "INFO"),
+        format="%(asctime)s|%(levelname)-8s|%(message)s|", level=os.getenv("PYTHON_LOGLEVEL", "INFO"),
     )
     args = parse_args(sys.argv[1:], prog="dotstash")
     if args.backup:

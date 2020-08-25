@@ -2,7 +2,15 @@ import sys
 import logging
 from enum import Enum
 
-from . import brew
+try:
+    from . import brew
+except RuntimeError:
+
+    class brew:
+        class Homebrew:
+            @classmethod
+            def deps(extra_packages=None):
+                return None
 
 
 def installedPackages(extra_manifest=None):
@@ -13,9 +21,9 @@ def installedPackages(extra_manifest=None):
         # All homebrew installations depend on `brew`
         extra_packages = extra_manifest.packages() if extra_manifest else None
         brew_package_group = brew.Homebrew.deps(extra_packages=extra_packages)
-        manifest["installed_packages"].append({"brew": brew_package_group})
-        logging.info(
-            "Found darwin dependencies: `brew` and %s friends",
-            sum(map(len, brew_package_group)),
-        )
+        if brew_package_group:
+            manifest["installed_packages"].append({"brew": brew_package_group})
+            logging.info(
+                "Found darwin dependencies: `brew` and %s friends", sum(map(len, brew_package_group)),
+            )
     return manifest
