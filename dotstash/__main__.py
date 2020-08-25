@@ -6,38 +6,73 @@ import logging
 import argparse
 import enum
 
-from datetime import datetime, timezone
+from datetime import datetime
 
 from . import system
+from .system.app_manifest import Manifest
+
+
+class ReadManifest(argparse.Action):
+    def __init__(self, option_strings, dest, **kwargs):
+        super().__init__(option_strings, dest, **kwargs)
+
+    def __call__(self, _parser, namespace, values, _option_strings):
+        if manifest := getattr(namespace, self.dest):
+            # Check for collisions with the existing manifest,
+            # This happens under t
+            for path in values:
+                with open(path) as stream:
+                    manifest.merge(Manifest.from_yaml(stream))
+            setattr(namespace, self.dest, manifest)
+        else:
+            manifest = Manifest()
+            for path in values:
+                with open(path) as stream:
+                    manifest.merge(Manifest.from_yaml(stream))
+            setattr(namespace, self.dest, manifest)
+
+
+def configure_parser(**kwargs):
+    parser = argparse.ArgumentParser(**kwargs)
+    subparsers = parser.add_subparsers(help="Available subcommands")
+    backup_parser = subparsers.add_parser(
+        "backup", help="Backup dotfiles to a given location"
+    )
+    backup_parser.add_argument(
+        "--manifest",
+        action=ReadManifest,
+        nargs="+",
+        help="Paths to files that specify package names "
+        "and associated files to backup",
+    )
+    backup_parser.set_defaults(backup=True)
+    install_parser = subparsers.add_parser(
+        "install", help="Install dotfiles from a given bundle"
+    )
+    install_parser.set_defaults(install=True)
+    return parser
 
 
 def parse_args(args, **kwargs):
-    logging.debug('Parsing args=%s, kwargs=%s', args, kwargs)
-    parser = argparse.ArgumentParser(**kwargs)
-    group = parser.add_mutually_exclusive_group()
-    group.add_argument(
-        '--backup', type=argparse.FileType('w'), nargs='?', metavar='PATH',
-        action='store', default='-',
-        help="Backup dotfiles and system configuration to given path")
-    group.add_argument(
-        '--install', type=argparse.FileType('r'), nargs=1, metavar='PATH',
-        help="Install dotfiles and system configuration from given path")
-    parser.add_argument('--config')
+    parser = configure_parser(**kwargs)
+    logging.debug("Parsing args=%s, kwargs=%s", args, kwargs)
     return parser.parse_args(args)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     logging.basicConfig(
         format="%(asctime)s|%(levelname)-8s|%(message)s|",
-        level=os.getenv('PYTHON_LOGLEVEL', 'INFO')
+        level=os.getenv("PYTHON_LOGLEVEL", "INFO"),
     )
-    args = parse_args(sys.argv[1:], prog='dotstash')
-    # Fetch all the system deps as we know about them
+    args = parse_args(sys.argv[1:], prog="dotstash")
     if args.backup:
         dependencies = {
-            "timestamp": datetime.now(tz=timezone.utc).strftime("%Y%m%d%H%M%S%z"),
+            "timestamp": datetime.now().astimezone().strftime("%Y%m%dT%H%M%S%z"),
         }
-        dependencies.update(system.installedPackages())
-        yaml.dump(dependencies, stream=args.backup)
+        # Fetch all installed system packages first, followed by adding the
+        # packages for which a file manifest was provided
+        dependencies.update(system.installedPackages(extra_manifest=args.manifest))
+
+        yaml.dump(dependencies, stream=sys.stdout)
     elif args.install:
-        yaml.load(stream=args.install, Loader=dict)
+        raise NotImplementedError()
