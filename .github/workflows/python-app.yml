@@ -34,7 +34,7 @@ jobs:
         flake8 . --count --statistics
     - name: Check code formatting with black
       run: |
-        black -t py38 --diff .
+        black -t py38 --diff --check .
     - name: Test with pytest
       run: |
         # Run as python so that CWD is included in PYTHONPATH
