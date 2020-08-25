@@ -18,7 +18,7 @@ class AppBundle(collections.Iterable):
 
     def __init__(self, package_name: str, paths_to_save: typing.List[str]):
         """Create a new `AppBundle`
-        
+
         :param package_name: Complete package name with which to associate
                              the saved paths
         :param paths_to_save:
@@ -39,10 +39,7 @@ class AppBundle(collections.Iterable):
     def __iter__(self):
         yield (
             self.pkg,
-            [
-                os.path.join(basedir, items[0]) if len(items) == 1 else basedir
-                for (basedir, items) in self.bundle
-            ],
+            [os.path.join(basedir, items[0]) if len(items) == 1 else basedir for (basedir, items) in self.bundle],
         )
 
 
@@ -61,20 +58,14 @@ class Manifest(collections.Iterable):
             raise ValueError("All manifests must be lists of objects")
         for item in obj:
             if not isinstance(item, dict):
-                raise ValueError(
-                    "All itemized objects in the manifest must be a key with "
-                    "a list of paths to save"
-                )
+                raise ValueError("All itemized objects in the manifest must be a key with " "a list of paths to save")
             for pkg, paths in item.items():
                 if not isinstance(paths, list):
                     raise ValueError("Paths to save for each app MUST be " "a list")
                 if pkg not in manifest.bundles:
                     manifest.bundles[pkg] = AppBundle(pkg, paths)
                 else:
-                    raise ValueError(
-                        "Package '%s' already seen in manifest! Discard "
-                        "disjoint specifications if any!"
-                    )
+                    raise ValueError("Package '%s' already seen in manifest! Discard " "disjoint specifications if any!")
         return manifest
 
     def merge(self, other: typing.TypeVar("Manifest", bound="Manifest")):

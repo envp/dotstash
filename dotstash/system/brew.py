@@ -11,7 +11,7 @@ from .utils import BinaryDependent
 
 
 def _matches_versioned_package_name(unversioned_name, versioned_name):
-    pattern = f"^{unversioned_name}@\d+(\.\d+)?(\.\d+)?$"
+    pattern = r"^{%s}@\d+(\.\d+)?(\.\d+)?$" % unversioned_name
     return re.match(pattern, versioned_name) is not None
 
 
@@ -26,18 +26,14 @@ class Homebrew(BinaryDependent, binary="brew", platform="darwin"):
         """
         logging.info("Reading `brew` installations")
         cmd = [cls.binary, "info", "--installed", "--json"]
-        with subprocess.Popen(
-            cmd, encoding="utf-8", stdout=subprocess.PIPE, stderr=subprocess.PIPE
-        ) as proc:
+        with subprocess.Popen(cmd, encoding="utf-8", stdout=subprocess.PIPE, stderr=subprocess.PIPE) as proc:
             proc.returncode
             alL_metadata = json.load(proc.stdout)
             explicitly_installed_packages = set()
             for pkgmeta in alL_metadata:
                 if len(pkgmeta["installed"]) != 1:
                     raise RuntimeError(
-                        "Expected exactly 1 element in 'installed' "
-                        "section for package %s",
-                        pkgmeta["name"],
+                        "Expected exactly 1 element in 'installed' " "section for package %s", pkgmeta["name"],
                     )
                 if pkgmeta["installed"][0]["installed_on_request"]:
                     name = pkgmeta["name"]
@@ -57,12 +53,7 @@ class Homebrew(BinaryDependent, binary="brew", platform="darwin"):
         logging.info("Reading `brew cask` installations")
         # This is simpler because `brew cask list` only seems to list explicitly
         # installed packages
-        outputLines = subprocess.run(
-            [cls.binary, "cask", "list"],
-            check=True,
-            capture_output=True,
-            encoding="utf-8",
-        ).stdout
+        outputLines = subprocess.run([cls.binary, "cask", "list"], check=True, capture_output=True, encoding="utf-8",).stdout
         if not outputLines:
             return roots
         # brew cask list uses its own format
