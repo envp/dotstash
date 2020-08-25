@@ -9,7 +9,7 @@ import yaml
 from .utils import file_iterator
 
 
-class AppBundle(collections.Iterable):
+class AppBundle(collections.abc.Iterable):
     """Represent an app such as `nvim`, or `tmux` etc. Where there are two
     steps to getting the system up to date:
         1. Install application
@@ -43,7 +43,7 @@ class AppBundle(collections.Iterable):
         )
 
 
-class Manifest(collections.Iterable):
+class Manifest(collections.abc.Iterable):
     """A manifest is a (possibly empty) collection of `AppBundle` objects"""
 
     def __init__(self, *bundles: typing.List[AppBundle]):
