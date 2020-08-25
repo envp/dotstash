@@ -37,4 +37,5 @@ jobs:
         black -t py38 --diff .
     - name: Test with pytest
       run: |
-        pytest -vv
+        # Run as python so that CWD is included in PYTHONPATH
+        python -m pytest -vv
