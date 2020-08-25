@@ -24,7 +24,6 @@ def installedPackages(extra_manifest=None):
         if brew_package_group:
             manifest["installed_packages"].append({"brew": brew_package_group})
             logging.info(
-                "Found darwin dependencies: `brew` and %s friends",
-                sum(map(len, brew_package_group)),
+                "Found darwin dependencies: `brew` and %s friends", sum(map(len, brew_package_group)),
             )
     return manifest
